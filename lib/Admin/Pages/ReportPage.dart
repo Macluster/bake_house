@@ -28,8 +28,8 @@ class _ReportPageState extends State<ReportPage> {
                     height: 50,
                   ),
                   const Text(
-                    "Reports",
-                    style: TextStyle(fontSize: 30),
+                    "Reports Page",
+                    style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
                     height: 100,

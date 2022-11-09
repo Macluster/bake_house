@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../Model/CartModel.dart';
+import '../Providers/OrderstateProvider.dart';
 import '../Providers/PopUpProvider.dart';
 
 class OrderPage extends StatefulWidget {
@@ -20,6 +21,15 @@ class OrderPage extends StatefulWidget {
 }
 
 class _OrderPageState extends State<OrderPage> {
+  @override
+  void initState() {
+    start();
+  }
+
+  void start() {
+    context.read<OrderStateProvider>().ResetOrderStateList();
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -44,46 +54,42 @@ class _OrderPageState extends State<OrderPage> {
                 children: [
                   Expanded(
                     flex: 1,
-                    child: Container(
-                      height: 500,
-                      width: 500,
-                      child: FutureBuilder(
-                        future: AdminDatabase().GetOrders(),
-                        builder:
-                            ((context, AsyncSnapshot<List<OrderModel>> snap) {
-                          if (snap.hasData) {
-                            Future.delayed(const Duration(milliseconds: 500),
-                                () {
-                              int id = 0;
-                              for (int k = 0; k < snap.data!.length; k++) {
-                                if (snap.data![k].status != "canceled" &&
-                                    snap.data![k].status != "finished") {
-                                  id = k;
-                                  break;
-                                }
-                              }
+                    child: Consumer<OrderStateProvider>(
+                      builder: ((context, value, child) {
+                        return Container(
+                          height: 500,
+                          width: 500,
+                          child: ListView.builder(
+                              itemCount: value.list.length,
+                              itemBuilder: (context, index) {
+                                Future.delayed(
+                                    const Duration(milliseconds: 500), () {
+                                  int id = 0;
+                                  for (int k = 0; k < value.list.length; k++) {
+                                    if (value.list[index].status !=
+                                            "canceled" &&
+                                        value.list[index].status !=
+                                            "finished") {
+                                      id = k;
+                                      break;
+                                    }
+                                  }
 // Here you can write your code
-                              snap.data![id].status != "canceled" &&
-                                      snap.data![id].status != "finished"
-                                  ? context
-                                      .read<OrderProvider>()
-                                      .changeOrderId(snap.data![0])
-                                  : print("");
-                            });
-
-                            return ListView.builder(
-                                itemCount: snap.data!.length,
-                                itemBuilder: (context, index) {
-                                  return snap.data![index].status !=
-                                              "canceled" &&
-                                          snap.data![index].status != "finished"
-                                      ? OrderCard(snap.data![index])
-                                      : Container();
+                                  value.list[id].status != "canceled" &&
+                                          value.list[id].status != "finished"
+                                      ? context
+                                          .read<OrderProvider>()
+                                          .changeOrderId(value.list[0])
+                                      : print("");
                                 });
-                          } else
-                            return Text("loading");
-                        }),
-                      ),
+
+                                return value.list[index].status != "canceled" &&
+                                        value.list[index].status != "finished"
+                                    ? OrderCard(value.list[index])
+                                    : Container();
+                              }),
+                        );
+                      }),
                     ),
                   ),
                   SizedBox(

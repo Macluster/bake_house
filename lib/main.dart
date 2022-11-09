@@ -21,6 +21,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Admin/Providers/OrderBoxProvider.dart';
+import 'Admin/Providers/OrderstateProvider.dart';
 import 'Components/PermissionAlert.dart';
 
 void main() async {
@@ -48,7 +49,11 @@ void main() async {
     ),
     ChangeNotifierProvider<ReschedulePopProvider>(
       create: (_) => ReschedulePopProvider(),
-    )
+    ),
+     ChangeNotifierProvider<OrderStateProvider>(
+      create: (_) => OrderStateProvider(),
+    ),
+
   ], child: MyApp()));
 }
 

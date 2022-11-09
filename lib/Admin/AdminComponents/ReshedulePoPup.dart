@@ -147,6 +147,9 @@ class _ReschedulePopupState extends State<ReschedulePopup> {
                       onTap: () {
                         AdminDatabase().updateOrders(DeliveryTime, DeliveryDate,
                             2.toString(), value.model.orderId.toString());
+                              context
+                                    .read<ReschedulePopProvider>()
+                                    .changeShowpopUp(false);
                       },
                       child: Container(
                         alignment: Alignment.center,
