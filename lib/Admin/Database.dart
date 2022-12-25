@@ -138,7 +138,7 @@ class AdminDatabase {
     var bakerId = "";
     SharedPreferences pref = await SharedPreferences.getInstance();
     bakerId = pref.getString("bakerId") as String;
-    print("bakerId" + bakerId);
+    print("bakerIdssss" + bakerId);
 
     var result = await http.post(
         Uri.parse('http://$ipAdress/bake_house/Server/GetOrdersByDate.php'),
@@ -152,6 +152,7 @@ class AdminDatabase {
           "Access-Control-Allow-Origin": "*"
         });
 
+print("rsssss="+result.body);
     var map = json.decode(result.body) as List;
 
     map.forEach((value) {

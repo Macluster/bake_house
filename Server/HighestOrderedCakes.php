@@ -5,7 +5,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Access-Control-Allow-Origin, Accept");
 
-$bakerId=1;
+$bakerId=intval($_POST['bakerId']);
 
 $k=0;
 

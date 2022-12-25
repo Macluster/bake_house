@@ -31,7 +31,7 @@ class _ReportPageState extends State<ReportPage> {
                     "Reports Page",
                     style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(
+                 const SizedBox(
                     height: 100,
                   ),
                   Row(
@@ -72,7 +72,7 @@ class _ReportPageState extends State<ReportPage> {
                           }
                         }),
                   ),
-                  SizedBox(
+                 const SizedBox(
                     height: 100,
                   ),
                   Row(
@@ -113,7 +113,7 @@ class _ReportPageState extends State<ReportPage> {
                           }
                         }),
                   ),
-                  SizedBox(
+                const  SizedBox(
                     height: 100,
                   ),
                   Row(
@@ -124,7 +124,7 @@ class _ReportPageState extends State<ReportPage> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                const  SizedBox(
                     height: 30,
                   ),
                   RecordsByDate()

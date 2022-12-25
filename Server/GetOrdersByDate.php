@@ -3,9 +3,12 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Access-Control-Allow-Origin, Accept");
 
-$bakerId=$_POST['bakerId'];
+$bakerId=intval($_POST['bakerId']);
 $sdate=$_POST['sdate'];
 $edate=$_POST['edate'];
+//$bakerId=$_POST['bakerId'];
+//$sdate=$_POST['sdate'];
+//$edate=$_POST['edate'];
 
 $con=mysqli_connect('localhost','root','','homebakers');
 
