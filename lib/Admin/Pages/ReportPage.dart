@@ -13,6 +13,9 @@ class ReportPage extends StatefulWidget {
 }
 
 class _ReportPageState extends State<ReportPage> {
+
+
+  int currentMenu=0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,14 +38,87 @@ class _ReportPageState extends State<ReportPage> {
                     height: 100,
                   ),
                   Row(
-                    children: const [
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+
+                   
+                     GestureDetector(
+                      onTap: (){
+                        setState(() {
+                          currentMenu=0;
+                        });
+                      },
+                       child: Container(
+                        alignment: Alignment.center,
+                        width: 200,
+                        height: 50,
+                        color: currentMenu==0?Colors.amber:Colors.white,
+                        child: Text("Most Ordered Cakes"),
+                     
+                                         ),
+                     ),
+                     GestureDetector(
+                      onTap: (){
+                        setState(() {
+                          currentMenu=1;
+                        });
+                      },
+                       child: Container(
+                           alignment: Alignment.center,
+                        width: 200,
+                        height: 50,
+                        color: currentMenu==1?Colors.amber:Colors.white,
+                        child: Text("Most Rated Cakes "),
+                     
+                                         ),
+                     ),
+                     GestureDetector(
+                      
+                      onTap: (){
+                        setState(() {
+                          currentMenu=2;
+                        });
+                      },
+                       child: Container(
+                           alignment: Alignment.center,
+                        width: 200,
+                        height: 50,
+                        color: currentMenu==2?Colors.amber:Colors.white,
+                        child: Text("Records"),
+                     
+                                         ),
+                     ),
+
+                  ],),
+                    const  SizedBox(height: 100,),
+                  Row(
+                    children: [
                       Text(
-                        "Most odered Cakes",
+                        currentMenu==0?"Most odered Cakes":currentMenu==1?"Most Rated Cake":"Reports",
                         style: TextStyle(fontSize: 30),
                       ),
                     ],
                   ),
-                  Container(
+              
+                  currentMenu==0?HighestOrderdCake():currentMenu==1?MostOrderedCake():RecordsByDate()
+                  
+                
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+
+
+
+
+ Widget HighestOrderdCake()
+ {
+  return Container(
                     height: 250,
                     child: FutureBuilder(
                         future: AdminDatabase().GetHeighestOrderedCake(),
@@ -71,19 +147,13 @@ class _ReportPageState extends State<ReportPage> {
                             return const Text("Loading data");
                           }
                         }),
-                  ),
-                 const SizedBox(
-                    height: 100,
-                  ),
-                  Row(
-                    children: const [
-                      Text(
-                        "Most Rated Cakes",
-                        style: TextStyle(fontSize: 30),
-                      ),
-                    ],
-                  ),
-                  Container(
+                  );
+ } 
+
+
+ Widget MostOrderedCake()
+ {
+  return   Container(
                     height: 250,
                     child: FutureBuilder(
                         future: AdminDatabase().GetHeighestOrderedCake(),
@@ -112,28 +182,6 @@ class _ReportPageState extends State<ReportPage> {
                             return const Text("Loading data");
                           }
                         }),
-                  ),
-                const  SizedBox(
-                    height: 100,
-                  ),
-                  Row(
-                    children: const [
-                      Text(
-                        "All records",
-                        style: TextStyle(fontSize: 30),
-                      ),
-                    ],
-                  ),
-                const  SizedBox(
-                    height: 30,
-                  ),
-                  RecordsByDate()
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+                  );
+ }
 }
