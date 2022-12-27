@@ -86,13 +86,13 @@ class _OrderPageState extends State<OrderPage> {
                                 return value.list[index].status != "canceled" &&
                                         value.list[index].status != "finished"
                                     ? OrderCard(value.list[index])
-                                    : Container();
+                                    : Text("Loadinfg");
                               }),
                         );
                       }),
                     ),
                   ),
-                  SizedBox(
+                 const SizedBox(
                     width: 30,
                   ),
                   Expanded(

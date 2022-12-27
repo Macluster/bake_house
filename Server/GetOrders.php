@@ -4,7 +4,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Access-Control-Allow-Origin, Accept");
 
-$bakerId=$_POST['bakerId'];
+$bakerId=intval($_POST['bakerId']);
 
 $con=mysqli_connect('localhost','root','','homebakers');
 
