@@ -56,6 +56,7 @@ class _OrderPageState extends State<OrderPage> {
                     flex: 1,
                     child: Consumer<OrderStateProvider>(
                       builder: ((context, value, child) {
+                        bool flag=true;
                         return Container(
                           height: 500,
                           width: 500,
@@ -64,29 +65,28 @@ class _OrderPageState extends State<OrderPage> {
                               itemBuilder: (context, index) {
                                 Future.delayed(
                                     const Duration(milliseconds: 500), () {
-                                  int id = 0;
-                                  for (int k = 0; k < value.list.length; k++) {
+                               
+
+                            
                                     if (value.list[index].status !=
                                             "canceled" &&
                                         value.list[index].status !=
-                                            "finished") {
-                                      id = k;
-                                      break;
-                                    }
-                                  }
-// Here you can write your code
-                                  value.list[id].status != "canceled" &&
-                                          value.list[id].status != "finished"
-                                      ? context
+                                            "finished"&&flag==true) {
+                                      flag=false;
+                                      context
                                           .read<OrderProvider>()
-                                          .changeOrderId(value.list[0])
-                                      : print("");
+                                          .changeOrderId(value.list[index]);
+                               
+                                    }
+                                  
+
+                                
                                 });
 
                                 return value.list[index].status != "canceled" &&
                                         value.list[index].status != "finished"
                                     ? OrderCard(value.list[index])
-                                    : Text("Loadinfg");
+                                    : Text("");
                               }),
                         );
                       }),

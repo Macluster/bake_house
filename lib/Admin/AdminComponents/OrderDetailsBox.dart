@@ -48,111 +48,245 @@ class _OrderDetailsBoxState extends State<OrderDetailsBox> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(),
-            Text(
-              context.read<OrderBoxProvider>().getOrderBoxFlag == false
-                  ? widget.model.cakeName
-                  : "chat with user",
-              style: TextStyle(fontSize: 40),
-            ),
-            Padding(
-              padding: EdgeInsets.all(10),
-              child: GestureDetector(
-                onTap: () {
-                  if (context.read<OrderBoxProvider>().getOrderBoxFlag == 0) {
-                    setState(() {
-                      isChatFlag = true;
-                    });
-                    context.read<OrderBoxProvider>().changeOrderBoxFlag(1);
-                  } else {
-                    setState(() {
-                      isChatFlag = false;
-                    });
-
-                    context.read<OrderBoxProvider>().changeOrderBoxFlag(0);
-                  }
-                },
-                child: const Icon(
-                  Icons.message,
-                  size: 30,
-                  color: Colors.grey,
-                ),
+    return Padding(
+      padding: const EdgeInsets.all(13),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(),
+              Text(
+                context.read<OrderBoxProvider>().getOrderBoxFlag == false
+                    ? widget.model.cakeName
+                    : "chat with user",
+                style: TextStyle(fontSize: 40),
               ),
-            )
-          ],
-        ),
-        SizedBox(
-          height: 50,
-        ),
-        Padding(
-          padding: const EdgeInsets.all(12),
-          child: Container(
-            width: 500,
-            color: Colors.amber,
-            child: Consumer<OrderBoxProvider>(
-              builder: ((context, value, child) {
-                return value.orderBoxflag == 0
-                    ? OrderDetailsCard()
-                    : ChatCard();
-              }),
+              Padding(
+                padding: EdgeInsets.all(10),
+                child: GestureDetector(
+                  onTap: () {
+                    if (context.read<OrderBoxProvider>().getOrderBoxFlag == 0) {
+                      setState(() {
+                        isChatFlag = true;
+                      });
+                      context.read<OrderBoxProvider>().changeOrderBoxFlag(1);
+                    } else {
+                      setState(() {
+                        isChatFlag = false;
+                      });
+
+                      context.read<OrderBoxProvider>().changeOrderBoxFlag(0);
+                    }
+                  },
+                  child: const Icon(
+                    Icons.message,
+                    size: 30,
+                    color: Colors.grey,
+                  ),
+                ),
+              )
+            ],
+          ),
+          const SizedBox(
+            height: 50,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(12),
+            child: Container(
+              width: 500,
+              color: Colors.amber,
+              child: Consumer<OrderBoxProvider>(
+                builder: ((context, value, child) {
+                  return value.orderBoxflag == 0
+                      ? OrderDetailsCard()
+                      : ChatCard();
+                }),
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
   OrderDetailsCard() {
+
+    Color itemColor=Colors.amber;
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Row(
-          children: [
+      
             Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(
-                "Weight:" + widget.model.weight.toString(),
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              Row(
+                
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      color: itemColor,
+                      height: 20,
+                      child: const Text(
+                        "Weight" ,
+                        style:
+                            TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      color: itemColor,
+                      height: 20,
+                      child: Text(
+                      ":  "+  widget.model.weight.toString(),
+                        style:
+                            TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 20,
               ),
-              Text("Calories:" + widget.model.calories.toString(),
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                       
+                      color: itemColor,
+                      height: 20,
+                      child: const Text(
+                        "Calories",
+                        style:
+                            TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                    
+                      color: itemColor,
+                      height: 20,
+                      child: Text(
+                       ":  "+ widget.model.calories.toString(),
+                        style:
+                            TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               const SizedBox(
                 height: 20,
               ),
-              Text(
-                  "Suagar Free:" + (widget.model.sugarfree == 1 ? "Yes" : "No"),
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      
+                      color: itemColor,
+                      height: 20,
+                      child: const Text(
+                        "Suagar Free",
+                        style:
+                            TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      color: itemColor,
+                      height: 20,
+                      child: Text(
+                       ":  "+ (widget.model.sugarfree == 1 ? "Yes" : "No"),
+                        style:
+                            TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               const SizedBox(
                 height: 20,
               ),
-              Text("Eggless:" + (widget.model.eggless == 1 ? "Yes" : "No"),
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      color: itemColor,
+                      height: 20,
+                      child: const Text(
+                        "Eggless",
+                        style:
+                            TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      color: itemColor,
+                      height: 20,
+                      child: Text(
+                        ":  "+(widget.model.eggless == 1 ? "Yes" : "No"),
+                        style:
+                            TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               const SizedBox(
                 height: 20,
               ),
-              Text("CakeWriting:" + widget.model.writing,
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      color: itemColor,
+                      height: 20,
+                      child: const Text(
+                        "CakeWriting",
+                        style:
+                            TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      color: itemColor,
+                      height: 20,
+                      child: Text(
+                        ":  "+widget.model.writing,
+                        style:
+                            TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               const SizedBox(
                 height: 20,
               ),
             ]),
-            Image.network(
+           /* Image.network(
               widget.model.cakeImage != ""
                   ? widget.model.cakeImage + "3.png"
                   : "https://customercare.igloosoftware.com/.api2/api/v1/communities/10068556/previews/thumbnails/4fc20722-5368-e911-80d5-b82a72db46f2?width=680&height=680&crop=False",
               height: 200,
               width: 200,
-            )
-          ],
-        ),
-        SizedBox(
+            )*/
+       
+      const SizedBox(
           height: 50,
         ),
         ActionComponents(widget.model)
@@ -163,7 +297,7 @@ class _OrderDetailsBoxState extends State<OrderDetailsBox> {
   ChatCard() {
     return Container(
       width: double.infinity,
-      height: 370,
+      height: 350,
       color: Colors.white,
       child: Column(
         children: [
