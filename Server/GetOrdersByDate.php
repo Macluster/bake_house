@@ -57,55 +57,61 @@ while($row=mysqli_fetch_assoc($result))
     $emon= intval( explode('/',$edate)[1]);
     $eyea=intval( explode('/',$edate)[2]);
 
-    if( $yea==$syea && $yea==$eyea )
+
+    $flag = 0;
+    if($yea==$syea)
     {
-        if($mon==$smon && $mon==$emon)
-        {
-            if($day>=$sday && $day<=$eday)
-            {
-                $json[$i++]=$arr;
-            }
-           
-        }
-        else if($mon>$smon && $mon<$emon )
-        {
-           
-                    $json[$i++]=$arr;
-        }
-        else if($mon>$smon && $mon<=$emon )
-        {
-            if($day<=$eday)
-            {
-                $json[$i++]=$arr;
-            }
-        }
-        else if($mon>=$smon && $mon<$emon )
+        if($mon==$smon)
         {
             if($day>=$sday)
             {
-                $json[$i++]=$arr;
+                    $flag = 1;  
             }
         }
-    }  
-    else if( $yea>$syea && $yea<=$eyea || $yea>=$syea && $yea<$eyea )
+        else if($mon>$smon)
+        {
+                $flag = 1;
+        }
+    }
+    else if($yea>$syea)
+    {
+        $flag = 1;  
+    }
+
+
+
+
+    $flag2 = 0;
+    if($yea==$eyea)
+    {
+        if($mon==$emon)
+        {
+            if($day<=$eday)
+            {
+                    $flag2 = 1;  
+            }
+        }
+        else if($mon<$emon)
+        {
+                $flag2 = 1;
+        }
+    }
+    else if($yea<$eyea)
+    {
+        $flag2 = 1;  
+    }
+
+
+    if($flag==1&&$flag2==1)
     {
         $json[$i++]=$arr;
     }
-    else if($yea>$syea && $yea<=$eyea )
-    {
-            $json[$i++]=$arr;
-    
-    }
-    else if($yea>=$syea && $yea<$eyea )
-    {
-        
-            $json[$i++]=$arr;
-        
-    }
 
 
 
-    
+
+
+
    
 
  
