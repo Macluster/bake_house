@@ -1,1 +1,1 @@
-const Configip = "192.168.1.42";//39
+const Configip = "192.168.1.55";//39
