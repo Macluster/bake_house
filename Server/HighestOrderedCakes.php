@@ -15,7 +15,7 @@ $json=array();
 $con=mysqli_connect('localhost','root','','homebakers');
 
 
-$sql="select count(cakeId) from cakes where bakerId=$bakerId";
+$sql="select count(cakeId) from orders where bakerId=$bakerId";
 $result0=mysqli_query($con,$sql);
 $row0=mysqli_fetch_assoc($result0);
 $noOfCakes= $row0['count(cakeId)'];

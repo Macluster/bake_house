@@ -28,7 +28,7 @@ class _ItemCardState extends State<HighesOrderItemCard> {
   }
 
   getPercantage() {
-    double percent = ((widget.value / widget.total) * 100);
+    double percent = ((widget.value / widget.total) * 100).toInt() as double;
     print("percent=" + percent.toString());
     return percent;
   }
