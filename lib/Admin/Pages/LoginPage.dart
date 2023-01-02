@@ -15,6 +15,23 @@ class BakerLoginPage extends StatefulWidget {
 class _LoginPageState extends State<BakerLoginPage> {
   final username = TextEditingController();
   final password = TextEditingController();
+  bool showPassaword = false;
+  String validationString = "";
+
+  validation() {
+    if (username.text.endsWith("@gmail.com") && username.text.isNotEmpty) {
+      setState(() {
+        validationString = "";
+      });
+      return true;
+    } else {
+      setState(() {
+        validationString = "Incorrect Format ";
+      });
+      return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,20 +97,42 @@ class _LoginPageState extends State<BakerLoginPage> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 10),
                       child: TextField(
+                        obscureText: showPassaword == false ? true : false,
                         controller: password,
-                        decoration: const InputDecoration(
-                            hintText: "Password", border: InputBorder.none),
+                        decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                              icon: showPassaword == false
+                                  ? Icon(Icons.visibility)
+                                  : Icon(Icons.visibility_off),
+                              onPressed: () {
+                                showPassaword =
+                                    showPassaword == true ? false : true;
+                                setState(() {});
+                              },
+                            ),
+                            hintText: "Password",
+                            border: InputBorder.none),
                       ),
                     ),
                   ),
+                  Text(validationString),
                   const SizedBox(
                     height: 50,
                   ),
                   GestureDetector(
-                    onTap: () {
-                      AdminAuthentication().Login(username.text, password.text);
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => AdminPage()));
+                    onTap: () async {
+                      if (validation() == true) {
+                        var result = await AdminAuthentication()
+                            .Login(username.text, password.text);
+                        if (result != "Incorrect UserName" &&
+                            result != "Incorrect password" &&
+                            result != "Incorrect UserNameIncorrect password") {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AdminPage()));
+                        }
+                      }
                     },
                     child: Container(
                       width: 100,
