@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 07, 2022 at 07:22 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Host: localhost
+-- Generation Time: Jan 03, 2023 at 05:03 AM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -72,10 +72,10 @@ CREATE TABLE `cakes` (
 --
 
 INSERT INTO `cakes` (`cakeId`, `cakeName`, `cakeFlavour`, `bakerId`, `cakeImage`, `cakePrice`, `cakeRating`, `cakeIngredients`, `cakeCalories`) VALUES
-(1, 'Butter Scotch', 'ButterScotch', 1, 'http://localhost/bake_house/Server/assets/cakes/1/Butter Scotch/', 750, 4, 'aaaa', 6050),
-(2, 'Red Velvet', 'Strawberry', 1, 'http://localhost/bake_house/Server/assets/cakes/1/Red Velvet/', 750, 4, 'aaaaa', 6999),
+(1, 'Butter Scotch', 'ButterScotch', 2, 'http://localhost/bake_house/Server/assets/cakes/1/Butter Scotch/', 750, 4, 'aaaa', 6050),
+(2, 'Red Velvet', 'Strawberry', 2, 'http://localhost/bake_house/Server/assets/cakes/1/Red Velvet/', 750, 4, 'aaaaa', 6999),
 (3, 'Vannila', 'Vannila', 1, 'http://localhost/bake_house/Server/assets/cakes/1/Vannila/', 650, 3, 'aaaa', 700),
-(4, 'Fruit', 'Fruits', 1, 'http://localhost/bake_house/Server/assets/cakes/2/Fruit Cake/', 850, 5, 'aaa', 600),
+(4, 'Fruit', 'Fruits', 1, 'http://localhost/bake_house/Server/assets/cakes/2/Fruit Cake/', 850, 4, 'aaa', 600),
 (5, 'Kit Kat', 'Chocolate', 1, 'http://localhost/bake_house/Server/assets/cakes/2/Kit Kat/', 900, 5, 'aaaaa', 800);
 
 -- --------------------------------------------------------
@@ -127,9 +127,7 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`cartId`, `cakeId`, `bakerId`, `userId`, `weight`, `calories`, `eggless`, `sugarfree`, `candleId`, `writing`, `date`, `time`) VALUES
-(1, 1, 1, 4, 1, 4850, 0, 1, 1, '0', '21', '5'),
-(2, 4, 3, 4, 2, 600, 1, 0, 3, 'happy birthday dachu ', '21/7/2022', '5:55 PM'),
-(3, 5, 5, 5, 1, 400, 0, 0, 0, '', '21/7/2022', '5:55 PM');
+(1, 2, 2, 4, 1, 6999, 0, 0, 0, '', '21/7/2022', '5:55 PM');
 
 -- --------------------------------------------------------
 
@@ -159,11 +157,8 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`orderId`, `cakeId`, `userId`, `weight`, `calories`, `eggless`, `sugarfree`, `candleId`, `writing`, `date`, `time`, `bakerId`, `status`, `location`) VALUES
-(7, 1, 4, '0.5', 3025, 0, 0, 0, 'Happy Birthday Aunty', '7/10/2022', '5:55 PM', 1, 'accepted', '9.9536536&76.3180468'),
-(8, 2, 4, '0.5', 3500, 0, 0, 0, 'Happy Wedding Aniversary', '8/10/2022', '5:55 PM', 1, 'pending', '9.9536536&76.3180476'),
-(9, 3, 4, '0.5', 350, 0, 0, 0, 'Happy Retirement', '21/10/2022', '5:55 PM', 1, 'pending', '9.9536537&76.3180462'),
-(10, 3, 4, '0.5', 350, 0, 0, 0, 'Happy Birthday Brother', '3/11/2022', '5:55 PM', 1, 'pending', '9.9536537&76.3180462'),
-(11, 4, 4, '0.5', 300, 0, 0, 0, 'Happy Birthday Bro', '7/11/2022', '5:55 PM', 1, 'pending', '9.9536536&76.3180468');
+(1, 3, 4, '1.0', 700, 0, 0, 1, 'Happy Birthfsy Mother', '2/1/2023', '10:27 AM', 1, 'accepted', '0&0'),
+(2, 4, 4, '0.5', 300, 0, 0, 0, '', '21/7/2022', '5:55 PM', 1, 'pending', '0&0');
 
 -- --------------------------------------------------------
 
@@ -183,12 +178,13 @@ CREATE TABLE `review` (
 --
 
 INSERT INTO `review` (`userId`, `cakeId`, `rating`, `review`) VALUES
-('4', '2', 4, 'Very Nice Cake'),
-('4', '6', 2, 'Not So Good'),
-('3', '2', 5, 'Superrrrrrrbb cake, really tasty!'),
-('3', '3', 3, 'So tasty creamy, but too much fat'),
-('5', '5', 3, 'Very good cake'),
-('4', '1', 2, 'good one\n');
+('4', '3', 4, 'nice cake'),
+('4', '3', 5, 'really good cake'),
+('4', '4', 2, 'cake is too much of fruits'),
+('4', '4', 2, 'asffasfasf'),
+('4', '4', 1, 'sdsdfasffsf'),
+('4', '4', 1, 'asdasdsd'),
+('4', '4', 5, 'asdasdfawfasf');
 
 -- --------------------------------------------------------
 
@@ -272,13 +268,13 @@ ALTER TABLE `cakes`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `orderId` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `orderId` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user`
